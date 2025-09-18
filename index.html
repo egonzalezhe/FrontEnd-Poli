@@ -1,0 +1,1472 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechFlow Solutions - Mockups Interactivos</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* HEADER */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        /* DROPDOWN */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background: rgba(255, 255, 255, 0.98);
+            min-width: 200px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            border-radius: 15px;
+            padding: 0.5rem 0;
+            top: 100%;
+            left: 0;
+            margin-top: 0.5rem;
+            z-index: 1001;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            color: #333 !important;
+            padding: 0.75rem 1.5rem;
+            display: block;
+            border-radius: 0;
+            margin: 0;
+            background: none !important;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+
+        .dropdown-content a:hover {
+            background: linear-gradient(135deg, #667eea, #764ba2) !important;
+            color: white !important;
+        }
+
+        /* PAGES */
+        .page {
+            display: none;
+            padding-top: 90px;
+            min-height: 100vh;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* HOME PAGE */
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .btn-hero {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: rgba(255, 255, 255, 0.9);
+            color: #667eea;
+        }
+
+        .btn-primary:hover {
+            background: white;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: white;
+        }
+
+        .slider {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            padding: 3rem;
+            margin: 3rem auto;
+            max-width: 900px;
+            text-align: center;
+            color: white;
+        }
+
+        .slide {
+            display: none;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        .slide h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .slide p {
+            font-size: 1.2rem;
+        }
+
+        .company-info {
+            background: rgba(255, 255, 255, 0.98);
+            margin: 4rem auto;
+            padding: 4rem;
+            border-radius: 25px;
+            max-width: 1000px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+        }
+
+        .company-info h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .company-info p {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 20px;
+            color: white;
+            transition: transform 0.3s ease;
+        }
+
+        .stat:hover {
+            transform: translateY(-10px);
+        }
+
+        .stat h3 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        /* SERVICES */
+        .services-hero {
+            text-align: center;
+            padding: 3rem 0;
+            color: white;
+        }
+
+        .services-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 20px rgba(0, 0, 0, 0.3);
+            font-weight: 700;
+        }
+
+        .services-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 25px;
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-icon {
+            font-size: 4rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            transition: transform 0.3s ease;
+            color: white;
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.1);
+        }
+
+        .service-card h3 {
+            color: #333;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .service-card p {
+            color: #666;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .service-price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* SERVICE DETAIL */
+        .service-detail {
+            padding: 2rem 0;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .detail-header {
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 25px;
+            padding: 3rem;
+            margin: 0 2rem 2rem;
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .detail-icon {
+            font-size: 5rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            width: 150px;
+            height: 150px;
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+        }
+
+        .detail-info h1 {
+            color: #333;
+            margin-bottom: 1rem;
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        .detail-price {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .promotion-badge {
+            background: linear-gradient(135deg, #ff4757, #ff3742);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(255, 71, 87, 0.3);
+        }
+
+        .detail-content {
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 25px;
+            padding: 3rem;
+            margin: 0 2rem;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .info-item {
+            background: linear-gradient(135deg, #f8f9ff, #f0f4ff);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border-left: 4px solid #667eea;
+        }
+
+        .features-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .features-list li {
+            background: linear-gradient(135deg, #e8f5e8, #f0f8f0);
+            padding: 1rem;
+            border-radius: 10px;
+            border-left: 4px solid #28a745;
+        }
+
+        /* LOGIN */
+        .login-main {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: calc(100vh - 90px);
+        }
+
+        .login-box {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            padding: 3rem;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            width: 100%;
+            max-width: 450px;
+            margin: 0 20px;
+        }
+
+        .login-icon {
+            font-size: 4rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            color: white;
+        }
+
+        .login-box h2 {
+            color: #333;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            font-weight: 600;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .demo-credentials {
+            background: linear-gradient(135deg, #e7f3ff, #f0f8ff);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-top: 2rem;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+        }
+
+        /* ADMIN */
+        .admin-main {
+            padding-top: 110px;
+            min-height: 100vh;
+        }
+
+        .admin-header {
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 25px;
+            padding: 2.5rem;
+            margin: 0 2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .admin-title {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .admin-icon {
+            font-size: 3rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .stat-badge {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-left: 1rem;
+        }
+
+        .crud-section {
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 25px;
+            padding: 2.5rem;
+            margin: 0 2rem;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .crud-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 15px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(40, 167, 69, 0.4);
+        }
+
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .admin-table th {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 1.5rem 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .admin-table td {
+            padding: 1.2rem 1rem;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .admin-table tr:hover {
+            background: rgba(102, 126, 234, 0.05);
+        }
+
+        .badge {
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .badge-success {
+            background: linear-gradient(135deg, #d4edda, #c3e6cb);
+            color: #155724;
+        }
+
+        .badge-danger {
+            background: linear-gradient(135deg, #f8d7da, #f5c6cb);
+            color: #721c24;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-small {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-edit {
+            background: linear-gradient(135deg, #17a2b8, #138496);
+            color: white;
+        }
+
+        .btn-edit:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(23, 162, 184, 0.4);
+        }
+
+        .btn-delete {
+            background: linear-gradient(135deg, #dc3545, #c82333);
+            color: white;
+        }
+
+        .btn-delete:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(220, 53, 69, 0.4);
+        }
+
+        /* MODAL */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 25px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .close {
+            font-size: 2rem;
+            cursor: pointer;
+            color: #999;
+        }
+
+        .close:hover {
+            color: #333;
+        }
+
+        /* FOOTER */
+        footer {
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 3rem 0;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            color: #667eea;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .footer-section p {
+            margin-bottom: 0.5rem;
+            opacity: 0.9;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .hero-buttons { flex-direction: column; align-items: center; }
+            .detail-header { flex-direction: column; text-align: center; }
+            .stats { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+            .services-container { grid-template-columns: 1fr; padding: 1rem; }
+            .admin-header { flex-direction: column; gap: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">TechFlow Solutions</div>
+            <ul class="nav-links">
+                <li><a onclick="showPage('home')" class="active">🏠 Inicio</a></li>
+                
+                <li class="dropdown">
+                    <a>📋 Mockups ▼</a>
+                    <div class="dropdown-content">
+                        <a onclick="showPage('home')">Mockup 1: Home</a>
+                        <a onclick="showPage('services')">Mockup 2: Servicios</a>
+                        <a onclick="showPage('service-detail')">Mockup 3: Detalle</a>
+                        <a onclick="showPage('login')">Mockup 4: Login</a>
+                        <a onclick="showPage('admin')">Mockup 5: Admin</a>
+                    </div>
+                </li>
+
+                <li><a onclick="showPage('services')">🛍️ Servicios</a></li>
+                <li><a onclick="showPage('login')">👤 Admin</a></li>
+                <li><a onclick="showDemoInfo()">ℹ️ Demo</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- MOCKUP 1: HOME PAGE -->
+    <div id="home" class="page active">
+        <div class="container">
+            <div class="hero">
+                <h1>TechFlow Solutions</h1>
+                <p>Transformamos ideas en soluciones tecnológicas innovadoras que impulsan el crecimiento exponencial de tu negocio</p>
+                <div class="hero-buttons">
+                    <a onclick="showPage('services')" class="btn-hero btn-primary">🚀 Ver Servicios</a>
+                    <a onclick="showPage('login')" class="btn-hero btn-outline">👤 Panel Admin</a>
+                </div>
+            </div>
+
+            <div class="slider">
+                <div class="slide active">
+                    <h3>🚀 Desarrollo de Software</h3>
+                    <p>Creamos aplicaciones modernas, escalables y de alto rendimiento utilizando las últimas tecnologías</p>
+                </div>
+                <div class="slide">
+                    <h3>☁️ Servicios en la Nube</h3>
+                    <p>Migración completa a la nube con optimización de costos y máxima seguridad</p>
+                </div>
+                <div class="slide">
+                    <h3>🔐 Ciberseguridad Avanzada</h3>
+                    <p>Protección integral de datos con auditorías de seguridad y monitoreo 24/7</p>
+                </div>
+                <div class="slide">
+                    <h3>🤖 Inteligencia Artificial</h3>
+                    <p>Soluciones de IA personalizadas para automatizar procesos empresariales</p>
+                </div>
+            </div>
+
+            <div class="company-info">
+                <h2>¿Quiénes Somos?</h2>
+                <p>Somos una empresa líder en servicios tecnológicos con más de 10 años de experiencia transformando negocios. Nos especializamos en desarrollo de software, consultoría IT y soluciones digitales personalizadas para empresas de todos los tamaños.</p>
+                
+                <div class="stats">
+                    <div class="stat">
+                        <h3>500+</h3>
+                        <p>Proyectos Completados</p>
+                    </div>
+                    <div class="stat">
+                        <h3>50+</h3>
+                        <p>Clientes Satisfechos</p>
+                    </div>
+                    <div class="stat">
+                        <h3>24/7</h3>
+                        <p>Soporte Técnico</p>
+                    </div>
+                    <div class="stat">
+                        <h3>99.9%</h3>
+                        <p>Tiempo Activo</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h4>Contacto</h4>
+                        <p>📧 info@techflowsolutions.com</p>
+                        <p>📱 +57 300 123 4567</p>
+                        <p>📍 Bogotá, Colombia</p>
+                        <p>🌐 www.techflowsolutions.com</p>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Servicios Destacados</h4>
+                        <p>• Desarrollo Web & Mobile</p>
+                        <p>• Cloud Computing</p>
+                        <p>• Inteligencia Artificial</p>
+                        <p>• Ciberseguridad</p>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Síguenos</h4>
+                        <p>📘 LinkedIn</p>
+                        <p>🐦 Twitter</p>
+                        <p>📸 Instagram</p>
+                        <p>📕 YouTube</p>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2024 TechFlow Solutions. Todos los derechos reservados.</p>
+                    <p>Desarrollado con ❤️ para el Politécnico Grancolombiano</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- MOCKUP 2: SERVICES PAGE -->
+    <div id="services" class="page">
+        <div class="container">
+            <div class="services-hero">
+                <h1>Nuestros Servicios</h1>
+                <p>Soluciones tecnológicas completas para impulsar tu negocio al siguiente nivel</p>
+            </div>
+
+            <div class="services-container">
+                <div class="service-card" onclick="showServiceDetail(1)">
+                    <div class="service-icon">💻</div>
+                    <h3>Desarrollo Web</h3>
+                    <p>Sitios web modernos, responsivos y optimizados para SEO con las mejores prácticas</p>
+                    <div class="service-price">$2.500.000</div>
+                </div>
+
+                <div class="service-card" onclick="showServiceDetail(2)">
+                    <div class="service-icon">📱</div>
+                    <h3>Apps Móviles</h3>
+                    <p>Aplicaciones nativas para iOS y Android con interfaces intuitivas y funcionales</p>
+                    <div class="service-price">$4.500.000</div>
+                </div>
+
+                <div class="service-card" onclick="showServiceDetail(3)">
+                    <div class="service-icon">☁️</div>
+                    <h3>Cloud Computing</h3>
+                    <p>Migración a la nube, optimización de infraestructura y servicios escalables</p>
+                    <div class="service-price">$3.200.000</div>
+                </div>
+
+                <div class="service-card" onclick="showServiceDetail(4)">
+                    <div class="service-icon">🔐</div>
+                    <h3>Ciberseguridad</h3>
+                    <p>Auditorías de seguridad, protección de datos y monitoreo continuo</p>
+                    <div class="service-price">$2.800.000</div>
+                </div>
+
+                <div class="service-card" onclick="showServiceDetail(5)">
+                    <div class="service-icon">🤖</div>
+                    <h3>Inteligencia Artificial</h3>
+                    <p>Soluciones de IA y Machine Learning personalizadas para tu industria</p>
+                    <div class="service-price">$6.500.000</div>
+                </div>
+
+                <div class="service-card" onclick="showServiceDetail(6)">
+                    <div class="service-icon">🎨</div>
+                    <h3>UI/UX Design</h3>
+                    <p>Diseño de interfaces centradas en el usuario con experiencias excepcionales</p>
+                    <div class="service-price">$1.800.000</div>
+                </div>
+
+                <div class="service-card" onclick="showServiceDetail(7)">
+                    <div class="service-icon">📊</div>
+                    <h3>Business Intelligence</h3>
+                    <p>Análisis de datos, reportes ejecutivos y dashboards interactivos</p>
+                    <div class="service-price">$3.800.000</div>
+                </div>
+
+                <div class="service-card" onclick="showServiceDetail(8)">
+                    <div class="service-icon">🔧</div>
+                    <h3>Mantenimiento IT</h3>
+                    <p>Soporte técnico especializado 24/7 y mantenimiento preventivo</p>
+                    <div class="service-price">$1.200.000</div>
+                </div>
+
+                <div class="service-card" onclick="showServiceDetail(9)">
+                    <div class="service-icon">🌐</div>
+                    <h3>E-commerce</h3>
+                    <p>Tiendas online completas con pasarelas de pago y gestión de inventario</p>
+                    <div class="service-price">$3.500.000</div>
+                </div>
+
+                <div class="service-card" onclick="showServiceDetail(10)">
+                    <div class="service-icon">📈</div>
+                    <h3>Consultoría Digital</h3>
+                    <p>Estrategias de transformación digital y optimización de procesos</p>
+                    <div class="service-price">$2.200.000</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MOCKUP 3: SERVICE DETAIL -->
+    <div id="service-detail" class="page">
+        <div class="service-detail">
+            <div class="detail-header">
+                <div id="detail-icon" class="detail-icon">💻</div>
+                <div class="detail-info">
+                    <h1 id="detail-name">Desarrollo Web</h1>
+                    <div id="detail-price" class="detail-price">$2.500.000</div>
+                    <span id="promotion-badge" class="promotion-badge">¡En Promoción! 20% OFF</span>
+                </div>
+            </div>
+
+            <div class="detail-content">
+                <div class="detail-section">
+                    <h3>Descripción del Servicio</h3>
+                    <p id="detail-description">
+                        Desarrollamos sitios web modernos, responsivos y optimizados para SEO utilizando las últimas tecnologías como React, Vue.js, Node.js y bases de datos escalables. Nuestro servicio incluye diseño personalizado, desarrollo frontend y backend, integración con APIs, sistema de gestión de contenidos y optimización completa para dispositivos móviles.
+                    </p>
+                </div>
+
+                <div class="info-grid">
+                    <div class="info-item">
+                        <strong>📦 Servicios Disponibles:</strong><br>
+                        <span id="detail-stock">15 proyectos</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>⏱️ Tiempo de Entrega:</strong><br>
+                        4-6 semanas
+                    </div>
+                    <div class="info-item">
+                        <strong>🛡️ Garantía:</strong><br>
+                        12 meses completos
+                    </div>
+                    <div class="info-item">
+                        <strong>🎧 Soporte:</strong><br>
+                        Incluido 6 meses
+                    </div>
+                </div>
+
+                <div class="detail-section">
+                    <h3>Características Incluidas</h3>
+                    <ul class="features-list">
+                        <li>✅ Diseño responsive y moderno</li>
+                        <li>✅ Optimización SEO avanzada</li>
+                        <li>✅ Panel administrativo completo</li>
+                        <li>✅ Integración redes sociales</li>
+                        <li>✅ Certificado SSL incluido</li>
+                        <li>✅ Hosting gratuito por 1 año</li>
+                        <li>✅ Dominio .com incluido</li>
+                        <li>✅ Backup automático diario</li>
+                        <li>✅ Analytics y métricas</li>
+                        <li>✅ Formularios de contacto</li>
+                        <li>✅ Chat en línea integrado</li>
+                        <li>✅ Optimización de velocidad</li>
+                    </ul>
+                </div>
+
+                <div style="display: flex; gap: 1rem; margin-top: 3rem;">
+                    <button class="btn-success" onclick="alert('¡Cotización enviada! Nos contactaremos contigo pronto.')">💰 Solicitar Cotización</button>
+                    <button class="btn-login" onclick="showPage('services')" style="background: #6c757d; width: auto; padding: 1rem 2rem;">← Volver a Servicios</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MOCKUP 4: LOGIN -->
+    <div id="login" class="page">
+        <div class="login-main">
+            <div class="login-box">
+                <div class="login-icon">🔐</div>
+                <h2>Acceso Administrativo</h2>
+                <p>Ingresa tus credenciales para acceder al panel de control</p>
+                
+                <form onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label for="username">👤 Usuario:</label>
+                        <input type="text" id="username" required placeholder="Ingresa tu usuario">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">🔑 Contraseña:</label>
+                        <input type="password" id="password" required placeholder="Ingresa tu contraseña">
+                    </div>
+
+                    <button type="submit" class="btn-login">🚀 Iniciar Sesión</button>
+                </form>
+
+                <div class="demo-credentials">
+                    <h4>📋 Credenciales de Demostración</h4>
+                    <p><strong>Usuario:</strong> admin</p>
+                    <p><strong>Contraseña:</strong> admin123</p>
+                    <small>Utiliza estas credenciales para acceder al panel administrativo</small>
+                </div>
+
+                <div style="margin-top: 2rem; text-align: center;">
+                    <a onclick="showPage('home')" style="color: #667eea; cursor: pointer; text-decoration: none;">← Volver al inicio</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MOCKUP 5: ADMIN PANEL -->
+    <div id="admin" class="page">
+        <div class="admin-main">
+            <div class="container">
+                <div class="admin-header">
+                    <div class="admin-title">
+                        <div class="admin-icon">🛠️</div>
+                        <div>
+                            <h1>Panel de Administración</h1>
+                            <p>Gestión completa de servicios y contenido</p>
+                        </div>
+                    </div>
+                    <div>
+                        <span class="stat-badge">10 Servicios Activos</span>
+                        <span class="stat-badge">Admin: SuperUser</span>
+                    </div>
+                </div>
+
+                <div class="crud-section">
+                    <div class="crud-header">
+                        <div>
+                            <h2>📋 Gestión de Servicios</h2>
+                            <p>Administra todos los servicios de la empresa</p>
+                        </div>
+                        <button class="btn-success" onclick="showAddServiceModal()">➕ Nuevo Servicio</button>
+                    </div>
+
+                    <div style="overflow-x: auto;">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Icono</th>
+                                    <th>Nombre del Servicio</th>
+                                    <th>Precio (COP)</th>
+                                    <th>Stock</th>
+                                    <th>Promoción</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>001</td>
+                                    <td style="font-size: 2rem;">💻</td>
+                                    <td>Desarrollo Web</td>
+                                    <td>$2.500.000</td>
+                                    <td>15</td>
+                                    <td><span class="badge badge-success">Activa</span></td>
+                                    <td><span class="badge badge-success">Disponible</span></td>
+                                    <td class="action-buttons">
+                                        <button class="btn-small btn-edit" onclick="editService(1)">✏️</button>
+                                        <button class="btn-small btn-delete" onclick="deleteService(1)">🗑️</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>002</td>
+                                    <td style="font-size: 2rem;">📱</td>
+                                    <td>Apps Móviles</td>
+                                    <td>$4.500.000</td>
+                                    <td>8</td>
+                                    <td><span class="badge badge-danger">Sin promoción</span></td>
+                                    <td><span class="badge badge-success">Disponible</span></td>
+                                    <td class="action-buttons">
+                                        <button class="btn-small btn-edit" onclick="editService(2)">✏️</button>
+                                        <button class="btn-small btn-delete" onclick="deleteService(2)">🗑️</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>003</td>
+                                    <td style="font-size: 2rem;">☁️</td>
+                                    <td>Cloud Computing</td>
+                                    <td>$3.200.000</td>
+                                    <td>12</td>
+                                    <td><span class="badge badge-success">Activa</span></td>
+                                    <td><span class="badge badge-success">Disponible</span></td>
+                                    <td class="action-buttons">
+                                        <button class="btn-small btn-edit" onclick="editService(3)">✏️</button>
+                                        <button class="btn-small btn-delete" onclick="deleteService(3)">🗑️</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>004</td>
+                                    <td style="font-size: 2rem;">🔐</td>
+                                    <td>Ciberseguridad</td>
+                                    <td>$2.800.000</td>
+                                    <td>6</td>
+                                    <td><span class="badge badge-danger">Sin promoción</span></td>
+                                    <td><span class="badge badge-success">Disponible</span></td>
+                                    <td class="action-buttons">
+                                        <button class="btn-small btn-edit" onclick="editService(4)">✏️</button>
+                                        <button class="btn-small btn-delete" onclick="deleteService(4)">🗑️</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>005</td>
+                                    <td style="font-size: 2rem;">🤖</td>
+                                    <td>Inteligencia Artificial</td>
+                                    <td>$6.500.000</td>
+                                    <td>4</td>
+                                    <td><span class="badge badge-success">Activa</span></td>
+                                    <td><span class="badge badge-success">Disponible</span></td>
+                                    <td class="action-buttons">
+                                        <button class="btn-small btn-edit" onclick="editService(5)">✏️</button>
+                                        <button class="btn-small btn-delete" onclick="deleteService(5)">🗑️</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid #eee;">
+                        <h3>📊 Estadísticas Rápidas</h3>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                            <div class="info-item">
+                                <strong>Total Servicios:</strong><br>
+                                10 servicios activos
+                            </div>
+                            <div class="info-item">
+                                <strong>Promociones Activas:</strong><br>
+                                3 servicios en promoción
+                            </div>
+                            <div class="info-item">
+                                <strong>Stock Total:</strong><br>
+                                150+ proyectos disponibles
+                            </div>
+                            <div class="info-item">
+                                <strong>Última Actualización:</strong><br>
+                                Hace 2 minutos
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para agregar/editar servicio -->
+    <div id="service-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">➕ Agregar Nuevo Servicio</h3>
+                <span class="close" onclick="closeServiceModal()">&times;</span>
+            </div>
+            <form style="padding: 2rem;" onsubmit="handleServiceSubmit(event)">
+                <div style="display: grid; grid-template-columns: 1fr 100px; gap: 1rem; margin-bottom: 1.5rem;">
+                    <div class="form-group">
+                        <label>Nombre del Servicio:</label>
+                        <input type="text" id="service-name" required placeholder="Ej: Desarrollo Móvil">
+                    </div>
+                    <div class="form-group">
+                        <label>Icono:</label>
+                        <input type="text" id="service-icon" maxlength="2" required placeholder="📱" style="text-align: center; font-size: 1.5rem;">
+                    </div>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+                    <div class="form-group">
+                        <label>Precio (COP):</label>
+                        <input type="number" id="service-price" required placeholder="2500000">
+                    </div>
+                    <div class="form-group">
+                        <label>Stock Disponible:</label>
+                        <input type="number" id="service-stock" required placeholder="10">
+                    </div>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 1.5rem;">
+                    <label>Descripción Detallada:</label>
+                    <textarea id="service-description" rows="4" style="width: 100%; padding: 1rem; border: 2px solid #e0e0e0; border-radius: 15px; font-family: inherit; resize: vertical;" placeholder="Describe las características principales del servicio..."></textarea>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 2rem;">
+                    <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                        <input type="checkbox" id="service-promotion">
+                        <span>🎉 Servicio en promoción</span>
+                    </label>
+                </div>
+
+                <div style="display: flex; gap: 1rem; justify-content: flex-end;">
+                    <button type="button" onclick="closeServiceModal()" style="padding: 1rem 2rem; background: #6c757d; color: white; border: none; border-radius: 15px; cursor: pointer;">❌ Cancelar</button>
+                    <button type="submit" class="btn-success">💾 Guardar Servicio</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Variables globales
+        let currentPage = 'home';
+        let currentSlide = 0;
+        let isLoggedIn = false;
+        let editingServiceId = null;
+
+        // Datos de servicios (simulando base de datos)
+        const services = {
+            1: { name: 'Desarrollo Web', price: '$2.500.000', icon: '💻', stock: '15 proyectos', promotion: true, description: 'Sitios web modernos, responsivos y optimizados para SEO utilizando las últimas tecnologías.' },
+            2: { name: 'Apps Móviles', price: '$4.500.000', icon: '📱', stock: '8 proyectos', promotion: false, description: 'Aplicaciones nativas para iOS y Android con interfaces intuitivas y funcionales.' },
+            3: { name: 'Cloud Computing', price: '$3.200.000', icon: '☁️', stock: '12 proyectos', promotion: true, description: 'Migración a la nube, optimización de infraestructura y servicios escalables.' },
+            4: { name: 'Ciberseguridad', price: '$2.800.000', icon: '🔐', stock: '6 proyectos', promotion: false, description: 'Auditorías de seguridad, protección de datos y monitoreo continuo.' },
+            5: { name: 'Inteligencia Artificial', price: '$6.500.000', icon: '🤖', stock: '4 proyectos', promotion: true, description: 'Soluciones de IA y Machine Learning personalizadas para tu industria.' }
+        };
+
+        // Navegación entre páginas
+        function showPage(pageId) {
+            // Ocultar todas las páginas
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Mostrar la página seleccionada
+            document.getElementById(pageId).classList.add('active');
+            
+            // Actualizar navegación activa
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            currentPage = pageId;
+            
+            // Efectos especiales según la página
+            if (pageId === 'admin') {
+                // Verificar si está logueado
+                if (!isLoggedIn) {
+                    alert('⚠️ Debes iniciar sesión primero');
+                    showPage('login');
+                    return;
+                }
+            }
+        }
+
+        // Mostrar detalle de servicio
+        function showServiceDetail(serviceId) {
+            const service = services[serviceId] || services[1];
+            
+            document.getElementById('detail-icon').textContent = service.icon;
+            document.getElementById('detail-name').textContent = service.name;
+            document.getElementById('detail-price').textContent = service.price;
+            document.getElementById('detail-stock').textContent = service.stock;
+            document.getElementById('detail-description').textContent = service.description;
+            
+            const promotionBadge = document.getElementById('promotion-badge');
+            if (service.promotion) {
+                promotionBadge.style.display = 'inline-block';
+            } else {
+                promotionBadge.style.display = 'none';
+            }
+            
+            showPage('service-detail');
+        }
+
+        // Manejo del login
+        function handleLogin(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (username === 'admin' && password === 'admin123') {
+                isLoggedIn = true;
+                alert('✅ ¡Login exitoso! Bienvenido al panel administrativo');
+                showPage('admin');
+            } else {
+                alert('❌ Credenciales incorrectas. Intenta con:\nUsuario: admin\nContraseña: admin123');
+            }
+        }
+
+        // Funciones CRUD
+        function showAddServiceModal() {
+            document.getElementById('modal-title').textContent = '➕ Agregar Nuevo Servicio';
+            document.getElementById('service-modal').style.display = 'flex';
+            editingServiceId = null;
+            
+            // Limpiar formulario
+            document.getElementById('service-name').value = '';
+            document.getElementById('service-icon').value = '';
+            document.getElementById('service-price').value = '';
+            document.getElementById('service-stock').value = '';
+            document.getElementById('service-description').value = '';
+            document.getElementById('service-promotion').checked = false;
+        }
+
+        function editService(serviceId) {
+            document.getElementById('modal-title').textContent = '✏️ Editar Servicio #' + serviceId;
+            document.getElementById('service-modal').style.display = 'flex';
+            editingServiceId = serviceId;
+            
+            // Cargar datos del servicio (simulado)
+            document.getElementById('service-name').value = 'Servicio ' + serviceId;
+            document.getElementById('service-icon').value = '🔧';
+            document.getElementById('service-price').value = '2500000';
+            document.getElementById('service-stock').value = '10';
+            document.getElementById('service-description').value = 'Descripción del servicio...';
+            document.getElementById('service-promotion').checked = Math.random() > 0.5;
+        }
+
+        function deleteService(serviceId) {
+            if (confirm('🗑️ ¿Estás seguro de eliminar este servicio?\n\nEsta acción no se puede deshacer.')) {
+                alert('✅ Servicio #' + serviceId + ' eliminado correctamente');
+                // Aquí iría la lógica para eliminar del servidor
+            }
+        }
+
+        function handleServiceSubmit(event) {
+            event.preventDefault();
+            
+            const serviceName = document.getElementById('service-name').value;
+            const action = editingServiceId ? 'actualizado' : 'creado';
+            
+            alert(`✅ Servicio "${serviceName}" ${action} correctamente`);
+            closeServiceModal();
+        }
+
+        function closeServiceModal() {
+            document.getElementById('service-modal').style.display = 'none';
+        }
+
+        // Slider automático
+        function nextSlide() {
+            const slides = document.querySelectorAll('#home .slide');
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+
+        // Información de demostración
+        function showDemoInfo() {
+            alert(`🎯 INFORMACIÓN DE DEMOSTRACIÓN
+
+📋 MOCKUPS DISPONIBLES:
+• Mockup 1: Página Principal (Home)
+• Mockup 2: Catálogo de Servicios  
+• Mockup 3: Detalle de Servicio
+• Mockup 4: Login Administrativo
+• Mockup 5: Panel Admin (CRUD)
+
+🔑 CREDENCIALES DE ACCESO:
+Usuario: admin
+Contraseña: admin123
+
+🎨 CARACTERÍSTICAS:
+✅ Diseño moderno y responsivo
+✅ Navegación fluida entre mockups
+✅ Sistema CRUD completo
+✅ Efectos visuales avanzados
+✅ Compatible con móviles
+
+💻 DESARROLLADO PARA:
+Politécnico Grancolombiano
+Proyecto de Mockups Interactivos`);
+        }
+
+        // Cerrar modal al hacer clic fuera
+        window.onclick = function(event) {
+            const modal = document.getElementById('service-modal');
+            if (event.target === modal) {
+                closeServiceModal();
+            }
+        }
+
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', function() {
+            // Iniciar slider automático
+            setInterval(nextSlide, 4000);
+            
+            // Mostrar página inicial
+            showPage('home');
+            
+            // Mensaje de bienvenida
+            setTimeout(() => {
+                console.log('🚀 TechFlow Solutions - Mockups cargados correctamente!');
+            }, 1000);
+        });
+
+        // Efectos adicionales
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-15px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
